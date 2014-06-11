@@ -9,7 +9,7 @@ import (
 	"regexp"
 	"time"
 	
-// 	"code.google.com/p/gopass"
+// 	pwd "github.com/seehuhn/password"
 // 	"gopkg.in/pipe.v2"	
 	"github.com/brunetto/goutils/debug"
 )
@@ -23,6 +23,7 @@ func main () () {
 	var ( 
 		waitingTime time.Duration = time.Duration(1) * time.Minute
 		
+//		pwTemp []byte
 // 		pw string
 		err error
 
@@ -56,9 +57,11 @@ func main () () {
 	
 	log.Println("No password request because assuming keys exchanges.")
 	
-// 	if pw, err = gopass.GetPass("Please insert your password: "); err != nil {
+// 	if pwTemp, err = pwd.Read("Please insert your password: "); err != nil {
 // 		log.Fatal("Error retrieving password; ", err)
 // 	}
+
+//	pw = string(pwTemp)
 	
 	log.Println("Syncing info: ")
 	fmt.Println("user: ", user)
