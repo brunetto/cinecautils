@@ -70,7 +70,7 @@ func main () () {
 	fmt.Println("destination: ", destination)
 	
 	for {
-		cmd := exec.Command("/usr/bin/rsync", "-avuhz", user+"@"+host+":"+source, destination)
+		cmd := exec.Command("/usr/bin/rsync", "-avuhzc", user+"@"+host+":"+source, destination)
 		
 		cmd.Stdout = os.Stdout
 		cmd.Stderr = os.Stderr
