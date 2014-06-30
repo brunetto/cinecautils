@@ -7,9 +7,8 @@ import (
 	"os"
 	"time"
 	
-	"code.google.com/p/go.crypto/ssh"
 	pwd "github.com/seehuhn/password"
-	// 	"code.google.com/p/gopass"
+	"github.com/brunetto/goutils/connection"
 )
 
 // RESOURCES:
@@ -58,29 +57,16 @@ func main () () {
 	//
 	// To authenticate with the remote server you must pass at least one
 	// implementation of AuthMethod via the Auth field in ClientConfig.
-	config := &ssh.ClientConfig{
-		User: usr,
-		Auth: []ssh.ClientAuth{
-			ssh.ClientAuthPassword(password(string(pw))),
-		},
-	}
 	
 	servers := []string{"login.eurora.cineca.it:22", "login.plx.cineca.it:22"}
 	
 	for {
 		for _, server := range servers {
-			
-			log.Println("Try to connect to ", server)
-			
-			client, err := ssh.Dial("tcp", server, config)
-			if err != nil {
-				panic("Failed to dial: " + err.Error())
-			}
-			
+		
 			// Each ClientConn can support multiple interactive sessions,
 			// represented by a Session.
 			log.Println("Start new session")
-			session, err := client.NewSession()
+			session, err := connection.SshSessionWithPw(server, usr, string(pw))
 			if err != nil {
 				panic("Failed to create session: " + err.Error())
 			}
@@ -105,9 +91,3 @@ func main () () {
 	}
 }
 
-// password implements the ClientPassword interface
-type password string
-
-func (p password) Password(user string) (string, error) {
-	return string(p), nil
-}
