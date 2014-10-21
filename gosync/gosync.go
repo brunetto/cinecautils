@@ -9,8 +9,6 @@ import (
 	"regexp"
 	"time"
 	
-// 	pwd "github.com/seehuhn/password"
-// 	"gopkg.in/pipe.v2"	
 	"github.com/brunetto/goutils/debug"
 )
 
